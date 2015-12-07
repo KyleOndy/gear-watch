@@ -1,0 +1,26 @@
+name:                gear-watch
+version:             0.1.0.0
+synopsis:            Simple project template from stack
+description:         Please see README.md
+homepage:            http://github.com/KyleOndy/gear-watch#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Kyle Ondy
+maintainer:          kyle@ondy.me
+copyright:           MIT
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable gear-watch
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  ghc-options:        -Wall -O2 -threaded
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , bytestring
+                     , http-conduit
+                     , html-conduit
+                     , xml-conduit
+                     , text
+                     , regex-tdfa
