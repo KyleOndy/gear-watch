@@ -38,7 +38,7 @@ data SaleItem = SaleItem { url :: String
 
 parseSaleItem :: Cursor -> SaleItem
 parseSaleItem c =
-  let u = siteUrl ++ (cleanString $ show $ attribute "href" c)
+  let u = siteUrl ++ cleanString (show $ attribute "href" c)
       d = cleanString $ show $ content $ head $ child c
       --pid = reverse $ takeWhile (\n -> n /= '/') $ reverse u
       pid = reverse $ takeWhile (/= '/') $ reverse u
@@ -54,8 +54,7 @@ checkedPosts :: String
 checkedPosts = ".checked.txt"
 
 frontPageSaleIds :: [SaleItem] -> [String]
-frontPageSaleIds items =
-  map postId $ items
+frontPageSaleIds = map postId
 
 --------------------------------------------------------------------------------
 
@@ -74,10 +73,10 @@ main = do
   print toBeNotifiedOf
 
 
-  --mapM_ (\itm -> appendFile checkedPosts $ itm ++ "\n") $ map postId $ getFrontPageSales cursor
 
 
 
+  mapM_ ((\itm -> appendFile checkedPosts $ itm ++ "\n") . postId) toBeNotifiedOf
 
   --frontPageIds <- map postId $ getFrontPageSales cursor
   --let uncheckedIds = frontPageSaleIds $ getFrontPageSales cursor \\ checkedIds
