@@ -24,3 +24,5 @@ executable gear-watch
                      , xml-conduit
                      , text
                      , regex-tdfa
+                     , containers
+                     , split
