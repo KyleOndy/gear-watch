@@ -2,9 +2,7 @@
 
 import Network.HTTP.Conduit (simpleHttp)
 import Text.HTML.DOM (parseLBS)
-import Text.Regex.TDFA
 import Text.XML.Cursor
-import Data.Map (toList)
 import Data.List
 import Data.List.Split
 
@@ -15,14 +13,9 @@ siteUrl = "http://www.mountainproject.com"
 forSaleForum :: String
 forSaleForum = siteUrl ++ "/v/for-sale--wanted/103989416"
 
-fullUrl :: String
-fullUrl = "www.mountainproject.com/v/for-sale--wanted/103989416"
-
 -- data we are looking for
 findNodes :: Cursor -> [Cursor]
 findNodes = element "a" >=> attributeIs "target" "_top"
-
-extractData = attribute "href"
 
 cursorFor :: String -> IO Cursor
 cursorFor u = do
@@ -50,9 +43,6 @@ parseSaleItem c =
       --pid = reverse $ takeWhile (\n -> n /= '/') $ reverse u
       pid = reverse $ takeWhile (/= '/') $ reverse u
       in SaleItem {url = u, description = d, postId = pid}
-
---parseSaleItem:: Cursor -> (String, String)
---parseSaleItem c = ( attribute "href" c, show $ content $ head $ child c)
 
 --------------------------------------------------------------------------------
 
