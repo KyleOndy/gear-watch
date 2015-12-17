@@ -75,10 +75,9 @@ main = do
 
 
 
+--------------------------------------------------------------------------------
+-- SEND PUSHBULLET ALERT HERE
+--------------------------------------------------------------------------------
 
   mapM_ ((\itm -> appendFile checkedPosts $ itm ++ "\n") . postId) toBeNotifiedOf
 
-  --frontPageIds <- map postId $ getFrontPageSales cursor
-  --let uncheckedIds = frontPageSaleIds $ getFrontPageSales cursor \\ checkedIds
-  --print $ lines uncheckedIds
-  -- write to file
