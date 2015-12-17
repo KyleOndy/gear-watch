@@ -5,6 +5,7 @@ import Text.HTML.DOM (parseLBS)
 import Text.XML.Cursor
 import Data.List
 import Data.List.Split
+import System.Process
 
 
 siteUrl :: String
@@ -56,6 +57,7 @@ checkedPosts = ".checked.txt"
 frontPageSaleIds :: [SaleItem] -> [String]
 frontPageSaleIds = map postId
 
+
 --------------------------------------------------------------------------------
 
 main :: IO ()
@@ -78,6 +80,13 @@ main = do
 --------------------------------------------------------------------------------
 -- SEND PUSHBULLET ALERT HERE
 --------------------------------------------------------------------------------
+
+  apiKey <-readFile ".apikey.txt"
+  --print $ init apiKey
+  --readProcess "SendPush.sh" [apiKey] ""
+
+  mapM_ (\itm -> callProcess "SendPush.sh" [init apiKey, "Mountain Project Sale!", description itm, url itm]) toBeNotifiedOf
+
 
   mapM_ ((\itm -> appendFile checkedPosts $ itm ++ "\n") . postId) toBeNotifiedOf
 
