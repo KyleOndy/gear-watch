@@ -18,12 +18,8 @@ executable gear-watch
   ghc-options:        -Wall -O2 -threaded
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
-                     , bytestring
                      , http-conduit
                      , html-conduit
                      , xml-conduit
-                     , text
-                     , regex-tdfa
-                     , containers
                      , split
                      , process
